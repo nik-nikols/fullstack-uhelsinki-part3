@@ -1,8 +1,10 @@
 const express = require('express')
+const morgan = require('morgan')
 
 const app = express()
 
 app.use(express.json())
+app.use(morgan('tiny'))
 
 let persons = [
     { 
@@ -82,7 +84,7 @@ app.post('/api/persons', (request, response) => {
     if (persons.find(person => person.name.toLowerCase() === body.name.toLowerCase())) {
         return response.status(400).send('name must be unique')
     }
-    
+
     const person = {
         id: generateId(),
         name: body.name,
