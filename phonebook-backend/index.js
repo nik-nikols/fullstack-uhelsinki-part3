@@ -79,6 +79,10 @@ app.post('/api/persons', (request, response) => {
         return response.status(400).send('number is missing')
     }
 
+    if (persons.find(person => person.name.toLowerCase() === body.name.toLowerCase())) {
+        return response.status(400).send('name must be unique')
+    }
+    
     const person = {
         id: generateId(),
         name: body.name,
