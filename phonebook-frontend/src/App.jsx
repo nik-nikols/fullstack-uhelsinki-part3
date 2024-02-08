@@ -49,11 +49,12 @@ const App = () => {
             showMessage(`Updated phone number for ${updatedPerson.name}`)
           })
           .catch(error => {
+            console.log('Update error:', error.response.data.error);
             setPersons(persons.filter(person => person.id !== changedPerson.id))
             setNewName('')
             setNewPhone('')
-            showMessage(`Information of ${changedPerson.name} has already been removed from the server`, 'error')
-          })
+            showMessage(error.response.data.error, 'error')
+          });
       }
       return;
     }
@@ -70,7 +71,13 @@ const App = () => {
           setNewName('')
           setNewPhone('')
           showMessage(`Added ${createdPerson.name}`)
-    })
+      })
+      .catch(error => {
+        console.log('Create error:', error.response.data.error);
+        setNewName('')
+        setNewPhone('')
+        showMessage(error.response.data.error, 'error')
+      });
     }
   }
 
