@@ -55,14 +55,6 @@ app.delete('/api/persons/:id', (request, response, next) => {
 app.post('/api/persons', (request, response, next) => {
     const body = request.body
 
-    if (!body.number) {
-        return response.status(400).send('number is missing')
-    }
-
-    // if (persons.find(person => person.name.toLowerCase() === body.name.toLowerCase())) {
-    //     return response.status(400).send('name must be unique')
-    // }
-
     const person = new Person({
         name: body.name,
         number: body.number
