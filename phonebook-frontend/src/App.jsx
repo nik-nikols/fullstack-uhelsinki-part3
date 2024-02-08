@@ -50,9 +50,6 @@ const App = () => {
           })
           .catch(error => {
             console.log('Update error:', error.response.data.error);
-            setPersons(persons.filter(person => person.id !== changedPerson.id))
-            setNewName('')
-            setNewPhone('')
             showMessage(error.response.data.error, 'error')
           });
       }
